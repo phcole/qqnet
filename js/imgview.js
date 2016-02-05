@@ -1,7 +1,7 @@
-document.write('\
+﻿document.write('\
 	<style type="text/css">\
 	#imgview{transition:all .2s linear;position:fixed;Z-INDEX:9999;top:0;right:0;bottom:0;left:0;opacity:0;display:none;background-color:rgba(0,0,0,0.6);}\
-	#imgview img{position:relative;top:50%;left:50%;}\
+	#imgview img{position:absolute;top:50%;left:50%;}\
 	</style>\
 	<div id="imgview"><img id="imgview_img" src=""></div>\
 ');
@@ -23,27 +23,27 @@ function unbindEvent(target, event, handler){
 };
 
 function resizeBgImg(s,t){
-	r_w = s.naturalWidth / (window.innerWidth - 10);
-	r_h = s.naturalHeight / (window.innerHeight - 10);
+	r_w = s.naturalWidth / (window.innerWidth - 20);
+	r_h = s.naturalHeight / (window.innerHeight - 20);
 	if (r_w >= 1 && r_h >= 1){ //长款同时出界
 		if (r_w >= r_h){
-			i_w = window.innerWidth - 10;
+			i_w = window.innerWidth - 20;
 			i_h = s.naturalHeight / r_w;
 		} else {
 			i_w = s.naturalWidth / r_h;
-			i_h = window.innerHeight - 10;
+			i_h = window.innerHeight - 20;
 		}
 	} else if (r_w >= 1){ //仅长出界
-		i_w = window.innerWidth - 10;
+		i_w = window.innerWidth - 20;
 		i_h = s.naturalHeight / r_w;
 	} else if (r_h >= 1){ //仅宽出界
 		i_w = s.naturalWidth / r_h;
-		i_h = window.innerHeight - 10;
+		i_h = window.innerHeight - 20;
 	} else { //完全未出界
 		i_w = s.naturalWidth;
 		i_h = s.naturalHeight;
 	}
-	t.style.marginLeft = "-" + i_w - / 2 + "px";
+	t.style.marginLeft = "-" + i_w / 2 + "px";
 	t.style.width = i_w + "px";
 	t.style.marginTop = "-" + i_h / 2 + "px";
 	t.style.height = i_h + "px";
@@ -70,8 +70,8 @@ function imgOnClick(e){
 	img = document.getElementById("imgview_img");
 	img.setAttribute("src", e.target.getAttribute("src"));
 	resizeBgImg(e.target, img);
-	bindEvent(bg, "mousewheel", bgOnScroll);
-	bindEvent(bg, "DOMMouseScroll", bgOnScroll);
+	bindEvent($(document), "mousewheel", bgOnScroll);
+	bindEvent($(document), "DOMMouseScroll", bgOnScroll);
 };
 
 function windowOnResize(e){
