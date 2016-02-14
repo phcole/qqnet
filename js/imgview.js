@@ -65,8 +65,8 @@ function bgOnScroll(e){
 function imgOnClick(e){
 	if (e.target.tagName != "IMG" || e.target.id == "imgview_img") return;
 	bg = document.getElementById("imgview");
-	bg.style.opacity="1";
 	bg.style.display="block";
+	bg.style.opacity="1";
 	img = document.getElementById("imgview_img");
 	img.setAttribute("src", e.target.getAttribute("src"));
 	resizeBgImg(e.target, img);
